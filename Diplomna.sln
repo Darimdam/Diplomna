@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33815.320
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Diplomna", "Diplomna\Diplomna.csproj", "{B2F25D5D-9F20-4AB3-90BF-1D4D5ACE584B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Diplomna.Database", "Diplomna.Database\Diplomna.Database.csproj", "{1E700D91-0514-4ABF-B989-F335FDE40808}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B2F25D5D-9F20-4AB3-90BF-1D4D5ACE584B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2F25D5D-9F20-4AB3-90BF-1D4D5ACE584B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2F25D5D-9F20-4AB3-90BF-1D4D5ACE584B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2F25D5D-9F20-4AB3-90BF-1D4D5ACE584B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1E700D91-0514-4ABF-B989-F335FDE40808}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E700D91-0514-4ABF-B989-F335FDE40808}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E700D91-0514-4ABF-B989-F335FDE40808}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E700D91-0514-4ABF-B989-F335FDE40808}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A4837DE3-7DC2-449A-A930-E73C26FE1760}
+	EndGlobalSection
+EndGlobal

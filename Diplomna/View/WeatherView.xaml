@@ -1,0 +1,378 @@
+﻿<UserControl x:Class="AgroProgress.View.WeatherView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:conv="clr-namespace:Diplomna.Helpers.Converters"
+             xmlns:local="clr-namespace:AgroProgress.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <conv:WeekdayNameConverter x:Key="weekdayNameConverter" />
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/Resources/Styles/ToggleButtonStyle.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/Resources/Styles/ButtonStyle.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/Resources/Styles/ListViewItemStyle.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!--First Row-->
+        <Rectangle Grid.Row="0"
+                   Margin="10,10,10,0"
+                   HorizontalAlignment="Stretch"
+                   VerticalAlignment="Stretch"
+                   Stroke="White"
+                   StrokeThickness="1"
+                   RadiusX="5"
+                   RadiusY="5"
+                   Fill="#d9eef9" />
+
+        <GroupBox Grid.Row="0" 
+                  Header="Дневна прогноза"
+                  HorizontalAlignment="Left"
+                  VerticalAlignment="Top"
+                  Margin="20,20,0,10"
+                  Height="auto"
+                  BorderBrush="#85c6eb"
+                  Foreground="#106EBE"
+                  TextBlock.FontSize="17"
+                  >
+            
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <Image Grid.Row="0"
+                       Grid.Column="0"
+                       Grid.RowSpan="3"
+                       Margin="0,20,0,10"
+                       MinHeight="50"
+                       MaxHeight="100"
+                       MinWidth="50"
+                       MaxWidth="100"
+                       Source="{Binding CurrentWeatherImageSource}">
+                </Image>
+
+                <!--First column-->
+                <TextBlock Grid.Column="1"
+                           Grid.Row="0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Center"
+                           Margin="10,10,10,10"
+                           Foreground="#106EBE"
+                           Text="{Binding Clouds, StringFormat=Облачност: {0} %}" />
+                <TextBlock Grid.Column="1"
+                           Grid.Row="1"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Center"
+                           Margin="10,10,10,10"
+                           Foreground="#106EBE"
+                           Text="{Binding Precipitation, StringFormat=Валежи: {0} %}" />
+                <TextBlock Grid.Column="1"
+                           Grid.Row="2"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Center"
+                           Margin="10,10,10,10"
+                           Foreground="#106EBE"
+                           Text="{Binding Humidity, StringFormat=Влажност: {0} % }" />
+
+                <!--Second Column-->
+                <TextBlock Grid.Column="2"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Center"
+                           Margin="10,20,10,10"
+                           Foreground="#106EBE"
+                           Text="{Binding Temp, StringFormat=Температура: {0} °C}" />
+                <TextBlock Grid.Column="2"
+                           Grid.Row="1"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Center"
+                           Margin="10,10,10,10"
+                           Foreground="#106EBE"
+                           Text="{Binding TempFeelsLike, StringFormat=Усеща се като: {0} °C}" />
+                <TextBlock Grid.Column="2"
+                           Grid.Row="2"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Center"
+                           Margin="10,10,10,10"
+                           Foreground="#106EBE"
+                           Text="{Binding WindSpeed, StringFormat=Вятър: {0} км/ч}" />
+
+                <!--Third Column-->
+                <TextBlock Grid.Column="3"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Center"
+                           Margin="10,20,10,10"
+                           Foreground="#106EBE"
+                           Text="{Binding TempMin, StringFormat=Мин. Температура: {0} °C}" />
+                <TextBlock Grid.Column="3"
+                           Grid.Row="1"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Center"
+                           Margin="10,10,10,10"
+                           Foreground="#106EBE"
+                           Text="{Binding TempMax, StringFormat=Макс. Температура: {0} °C}" />
+            </Grid>
+        </GroupBox>
+       
+        <!--Second Row-->
+        <Rectangle 
+            x:Name="SecondRectangle"
+            Grid.Row="1"
+                   Margin="10,10,10,0"
+                   HorizontalAlignment="Stretch"
+                   VerticalAlignment="Stretch"
+                   Stroke="White"
+                   StrokeThickness="1"
+                   RadiusX="5"
+                   RadiusY="5"
+                   Fill="#d9eef9" />
+
+        <GroupBox Grid.Row="1"
+                  Header="Прогноза за следващите 4 часа"
+                  Margin="20,20,20,10"
+                  Height="Auto"
+                  BorderBrush="#85c6eb"
+                  Foreground="#106EBE"
+                  FontSize="17">
+            <ListView Background="Transparent"
+                      BorderBrush="Transparent"
+                      ItemContainerStyle="{StaticResource listViewItemStyle}"
+                      ItemsSource="{Binding Hourly}">
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <GroupBox 
+                            TextBlock.FontSize="17"
+                                  BorderBrush="#85c6eb"
+                                  Foreground="#106EBE">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <TextBlock Grid.Row="0"
+                                           Grid.Column="0"
+                                           HorizontalAlignment="Left"
+                                           VerticalAlignment="Center"
+                                           Margin="10,20,10,10"
+                                           Foreground="#106EBE"
+                                           Text="{Binding Time, StringFormat=Час: {0}ч.}">
+                                </TextBlock>
+                                <TextBlock Grid.Row="0"
+                                           Grid.Column="1"
+                                           HorizontalAlignment="Left"
+                                           VerticalAlignment="Center"
+                                           Margin="10,20,10,10"
+                                           Foreground="#106EBE"
+                                           Text="{Binding Temperature_2m, StringFormat=Tемпература: {0} °C}">
+                                </TextBlock>
+                                <TextBlock Grid.Row="1"
+                                           Grid.Column="1"
+                                           HorizontalAlignment="Left"
+                                           VerticalAlignment="Center"
+                                           Margin="10,20,10,10"
+                                           Foreground="#106EBE"
+                                           Text="{Binding Apparent_temperature, StringFormat=Усеща се като: {0} °C}">
+                                </TextBlock>
+                                <TextBlock Grid.Row="1"
+                                           Grid.Column="0"
+                                           HorizontalAlignment="Left"
+                                           VerticalAlignment="Center"
+                                           Margin="10,20,10,10"
+                                           Foreground="#106EBE"
+                                           Text="{Binding Relativehumidity_2m, StringFormat=Влажност: {0} %}">
+                                </TextBlock>
+                                <TextBlock Grid.Row="2"
+                                           Grid.Column="0"
+                                           HorizontalAlignment="Left"
+                                           VerticalAlignment="Center"
+                                           Margin="10,20,10,10"
+                                           Foreground="#106EBE"
+                                           Text="{Binding Precipitation_probability, StringFormat=Валежи: {0}%}">
+                                </TextBlock>
+                                <TextBlock Grid.Row="2"
+                                           Grid.Column="2"
+                                           HorizontalAlignment="Left"
+                                           VerticalAlignment="Center"
+                                           Margin="10,20,10,10"
+                                           Foreground="#106EBE"
+                                           Text="{Binding Cloudcover, StringFormat=Облачност: {0} %}">
+                                </TextBlock>
+                                <Image Grid.Row="3"
+                                       Grid.ColumnSpan="2"
+                                       Grid.RowSpan="3"
+                                       Margin="0,20,0,10"
+                                       MinHeight="50"
+                                       MaxHeight="100"
+                                       MinWidth="50"
+                                       MaxWidth="100"
+                                       Source="{Binding Image}" />
+                            </Grid>
+                        </GroupBox>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </GroupBox>
+
+        <Button Grid.Row="1"
+                Width="90"
+                Margin="0,40,30,10"
+                VerticalAlignment="Top"
+                HorizontalAlignment="Right"
+                Style="{StaticResource RoundCorner}"
+                Content="Графика"
+                Command="{Binding ChartCommand}" />
+        <!--Third Row-->
+        <Rectangle x:Name="ThirdRectangle"
+                   Grid.Row="2"
+                   Margin="10,10,10,10"
+                   HorizontalAlignment="Stretch"
+                   VerticalAlignment="Stretch"
+                   Stroke="White"
+                   StrokeThickness="1"
+                   RadiusX="5"
+                   RadiusY="5"
+                   Fill="#d9eef9" />
+
+        <GroupBox Grid.Row="2"
+                  Header="Прогноза за следващите 7 дена"
+                  HorizontalAlignment="Left"
+                  VerticalAlignment="Center"
+                  Margin="20,10,30,10"
+                  Height="{Binding ElementName=ThirdRectangle, Path=ActualHeight}"
+                  BorderBrush="#85c6eb"
+                  Foreground="#106EBE"
+                  FontSize="17">
+            <ListView Background="Transparent"
+                      BorderBrush="Transparent"
+                      ItemContainerStyle="{StaticResource listViewItemStyle}"
+                      ItemsSource="{Binding Days}">
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal" />
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <GroupBox 
+                            TextBlock.FontSize="17"
+                            Header="{Binding Name, Converter={StaticResource weekdayNameConverter}}"
+                                  BorderBrush="#85c6eb"
+                                  Foreground="#106EBE">
+                            <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <TextBlock Grid.Row="0"
+                                       Grid.Column="0"
+                                       HorizontalAlignment="Left"
+                                       VerticalAlignment="Center"
+                                       Margin="10,20,10,10"
+                                       Foreground="#106EBE"
+                                       Text="{Binding Time, StringFormat=Дата: {0}}">
+                            </TextBlock>
+                            <TextBlock Grid.Row="0"
+                                       Grid.Column="1"
+                                       HorizontalAlignment="Left"
+                                       VerticalAlignment="Center"
+                                       Margin="10,20,10,10"
+                                       Foreground="#106EBE"
+                                           Text="{Binding Temperature_2m_min, StringFormat=Мин. температура: {0} °C}">
+                            </TextBlock>
+                            <TextBlock Grid.Row="1"
+                                       Grid.Column="1"
+                                       HorizontalAlignment="Left"
+                                       VerticalAlignment="Center"
+                                       Margin="10,20,10,10"
+                                       Foreground="#106EBE"
+                                           Text="{Binding Temperature_2m_max, StringFormat=Макс. температура: {0} °C}">
+                            </TextBlock>
+                            <TextBlock Grid.Row="2"
+                                       Grid.Column="2"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       Margin="10,20,10,10"
+                                       Foreground="#106EBE"
+                                       Text="{Binding Sunset, StringFormat=Залез: {0} ч.}">
+                            </TextBlock>
+                            <TextBlock Grid.Row="2"
+                                       Grid.Column="0"
+                                       HorizontalAlignment="Left"
+                                       VerticalAlignment="Center"
+                                       Margin="10,20,10,10"
+                                       Foreground="#106EBE"
+                                       Text="{Binding Sunrise, StringFormat=Изгрев: {0} ч.}">
+                            </TextBlock>
+                            <TextBlock Grid.Row="1"
+                                       Grid.Column="0"
+                                       HorizontalAlignment="Left"
+                                       VerticalAlignment="Center"
+                                       Margin="10,20,10,10"
+                                       Foreground="#106EBE"
+                                       Text="{Binding Precipitation_sum, StringFormat=Валежи: {0} %}">
+                            </TextBlock>
+                                <Image Grid.Row="3"
+                                       Grid.Column="0"
+                                       Grid.RowSpan="3"
+                                       Margin="0,20,0,10"
+                                       MinHeight="50"
+                                       MaxHeight="70"
+                                       MinWidth="50"
+                                       MaxWidth="100"
+                                       Source="/Resources/Images/sunrise.png"/>
+
+                                <Image Grid.Row="3"
+                                       Grid.Column="1"
+                                       Grid.RowSpan="3"
+                                       Margin="0,20,0,10"
+                                       MinHeight="50"
+                                       MaxHeight="70"
+                                       MinWidth="50"
+                                       MaxWidth="100"
+                                       Source="/Resources/Images/sunset.png" />
+                            </Grid>
+                        </GroupBox>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </GroupBox>
+    </Grid>
+</UserControl>
